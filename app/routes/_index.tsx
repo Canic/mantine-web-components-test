@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useEffect } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,41 +9,20 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+useEffect(() => {
+        import('~/components/WebApps').then((module) => {
+            customElements.define("webapp-1", module.WebApp1);
+            customElements.define("webapp-2", module.WebApp2);
+        });
+      }, []);
+
   return (
     <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      <h1>Here are two web-components</h1>
+      <webapp-1 />
+      <webapp-2 />
     </div>
   );
 }
+
+
